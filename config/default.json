@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://lula:lula0369@devconnector-1j36m.mongodb.net/workoutplannerdb?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
+  "githubClientId": "d430a1e3356da725a42d",
+  "githubSecret": "8e7f27f59d3e669ee51ea775933a85a290b9dbc7"
+}
