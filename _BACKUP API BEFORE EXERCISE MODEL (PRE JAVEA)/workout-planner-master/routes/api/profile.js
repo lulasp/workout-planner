@@ -40,13 +40,7 @@ router.post(
                 .isEmpty(),
             check('sex', 'Sex is required')
                 .not()
-                .isEmpty(),
-            check('job', 'Job is required')
-                .not()
-                .isEmpty(),
-            check('weekly_freq', 'weekly frequency is required')
-                .not()
-                .isEmpty(),
+                .isEmpty()
         ]
     ],
     async (req, res) => {
@@ -57,10 +51,7 @@ router.post(
 
         const {
             objective,
-            sex,
-            job,
-            weekly_freq,
-            obs
+            sex
         } = req.body;
 
         //BUILD PROFILE OBJECT
@@ -68,9 +59,6 @@ router.post(
         profileFields.user = req.user.id;
         if (objective) profileFields.objective = objective;
         if (sex) profileFields.sex = sex;
-        if (job) profileFields.job = job;
-        if (weekly_freq) profileFields.weekly_freq = weekly_freq;
-        if (obs) profileFields.obs = obs;
 
 
         try {
@@ -170,15 +158,6 @@ router.put(
             check('muscle_mass', 'Muscle mass is required')
                 .not()
                 .isEmpty(),
-            check('fat_mass', 'Fat mass is required')
-                .not()
-                .isEmpty(),
-            check('heart_rate', 'Heart rate is required')
-                .not()
-                .isEmpty(),
-            check('blood_pressure', 'Blood pressure is required')
-                .not()
-                .isEmpty(),
             check('description', 'Description is required')
                 .not()
                 .isEmpty(),
@@ -198,9 +177,6 @@ router.put(
             weight,
             age,
             muscle_mass,
-            fat_mass,
-            heart_rate,
-            blood_pressure,
             from,
             to,
             current,
@@ -212,9 +188,6 @@ router.put(
             weight,
             age,
             muscle_mass,
-            fat_mass,
-            heart_rate,
-            blood_pressure,
             from,
             to,
             current,

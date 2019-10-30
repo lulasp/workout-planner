@@ -13,17 +13,6 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    job: {
-        type: String,
-        required: true
-    },
-    weekly_freq: {
-        type: String,
-        required: true
-    },
-    obs: {
-        type: String
-    },
     body_state: [
         {
             height: {
@@ -39,18 +28,6 @@ const ProfileSchema = new mongoose.Schema({
                 required: true
             },
             muscle_mass: {
-                type: String,
-                required: true
-            },
-            fat_mass: {
-                type: String,
-                required: true
-            },
-            heart_rate: {
-                type: String,
-                required: true
-            },
-            blood_pressure: {
                 type: String,
                 required: true
             },

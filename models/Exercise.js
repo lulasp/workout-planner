@@ -1,34 +1,43 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PlanSchema = new Schema({
+const ExerciseSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
-    },
-    name: {
-        name: String
     },
     plan_type: {
         type: String,
         required: true
     },
-    date_started: {
-        type: Date,
+    exercise: {
+        type: String,
         required: true
     },
-    is_current: {
-        type: Boolean,
-        required: true,
-        default: true
+    muscle_group: {
+        type: String,
+        required: true
     },
-    date_ended: {
-        type: Date
+    is_machine: {
+        type: Boolean
     },
-    obs: {
+    machine_name: {
         type: String
     },
-    plan_evolutions: [
+    is_bench: {
+        type: Boolean
+    },
+    bench: {
+        type: String
+    },
+    bar_type: {
+        type: String
+    },
+    series: {
+        type: String,
+        required: true
+    },
+    evolutions: [
         {
             user: {
                 type: Schema.Types.ObjectId,
@@ -39,7 +48,16 @@ const PlanSchema = new Schema({
                 required: true
             },
             current_weight: {
-                type: String
+                type: String,
+                required: true
+            },
+            min_rep: {
+                type: String,
+                required: true
+            },
+            max_rep: {
+                type: String,
+                required: true
             },
             from: {
                 type: Date,
@@ -50,7 +68,7 @@ const PlanSchema = new Schema({
             },
             current: {
                 type: Boolean,
-                default: true
+                default: false
             },
             description: {
                 type: String,
@@ -64,4 +82,4 @@ const PlanSchema = new Schema({
     }
 });
 
-module.exports = Post = mongoose.model('plan', PlanSchema);
+module.exports = Exercise = mongoose.model('exercise', ExerciseSchema);

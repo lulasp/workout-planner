@@ -18,10 +18,13 @@ router.post(
             check('plan_type', 'Plan is required')
                 .not()
                 .isEmpty(),
-            check('date_started', 'Date Started is required')
+            check('exercise', 'Exercise is required')
                 .not()
                 .isEmpty(),
-            check('is_current', 'Is current is required')
+            check('muscle_group', 'Muscle Group is required')
+                .not()
+                .isEmpty(),
+            check('series', 'Series is required')
                 .not()
                 .isEmpty()
         ]
@@ -36,12 +39,16 @@ router.post(
             const user = await User.findById(req.user.id).select('-password');
 
             const newPlan = new Plan({
-                name: user.name,
                 plan_type: req.body.plan_type,
-                date_started: req.body.date_started,
-                is_current: req.body.is_current,
-                date_ended: req.body.date_ended,
-                obs: req.body.obs,
+                exercise: req.body.exercise,
+                muscle_group: req.body.muscle_group,
+                is_machine: req.body.is_machine,
+                machine_name: req.body.machine_name,
+                is_bench: req.body.is_bench,
+                bench: req.body.bench,
+                bar_type: req.body.bar_type,
+                series: req.body.series,
+                name: user.name,
                 user: req.user.id,
 
             });
@@ -122,7 +129,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 
-//@route    POST api/plans/evolution/:id
+//@route    PUT api/plans/evolution/:id
 //@desc     Create evolution for a plan
 //@access   Private
 router.post(
@@ -134,6 +141,12 @@ router.post(
                 .not()
                 .isEmpty(),
             check('current_weight', 'Current Weight is required')
+                .not()
+                .isEmpty(),
+            check('min_rep', 'Min rep is required')
+                .not()
+                .isEmpty(),
+            check('max_rep', 'Max rep is required')
                 .not()
                 .isEmpty(),
             check('from', 'From date is required')
@@ -157,6 +170,8 @@ router.post(
             const newEvolution = {
                 initial_weight: req.body.initial_weight,
                 current_weight: req.body.current_weight,
+                min_rep: req.body.min_rep,
+                max_rep: req.body.max_rep,
                 from: req.body.from,
                 to: req.body.to,
                 current: req.body.current,
@@ -164,11 +179,11 @@ router.post(
                 user: req.user.id
             };
 
-            plan.plan_evolutions.unshift(newEvolution);
+            plan.evolutions.unshift(newEvolution);
 
             await plan.save();
 
-            res.json(plan.plan_evolutions);
+            res.json(plan.evolutions);
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
