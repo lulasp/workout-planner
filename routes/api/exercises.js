@@ -34,10 +34,10 @@ router.post(
         }
 
         try {
-           // const user = await User.findById(req.user.id).select('-password');
-          //  const plan = await Plan.findById(req.params.id);
+            const user = await User.findById(req.user.id).select('-password');
+            const plan = await Plan.findById(req.params.id);
 
-            const newExercise = new Exercise ({
+            const newExercise = new Exercise({
                 plan_type: req.params.id,
                 exercise: req.body.exercise,
                 muscle_group: req.body.muscle_group,
@@ -104,7 +104,7 @@ router.get('/all/:id', auth, async (req, res) => {
     try {
         const plan = await Exercise.find({ plan_type: req.params.id }).populate("plan_type", [
             "plan_type"
-          ]);
+        ]);
         console.log(req.params.id);
         console.log(plan);
         if (!plan) {
@@ -121,7 +121,7 @@ router.get('/all/:id', auth, async (req, res) => {
     }
 });
 
-//@route    DELETE api/exercise/:id
+//@route    DELETE api/exercises/:id
 //@desc     Delete an exercise
 //@access   Private
 router.delete('/:id', auth, async (req, res) => {
@@ -151,7 +151,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 
-//@route    POST api/exercise/evolution/:id
+//@route    POST api/exercises/evolution/:id
 //@desc     Create evolution for an exercise
 //@access   Private
 router.post(
@@ -201,11 +201,11 @@ router.post(
                 user: req.user.id
             };
 
-            plan.plan_evolutions.unshift(newEvolution);
+            exercise.evolutions.unshift(newEvolution);
 
-            await plan.save();
+            await exercise.save();
 
-            res.json(plan.plan_evolutions);
+            res.json(exercise.evolutions);
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -297,7 +297,7 @@ router.post(
     });*/
 
 
-//@route    DELETE api/plans/evolution/:id/:evolution_id
+//@route    DELETE api/exercises/evolution/:id/:evolution_id
 //@desc     Delete evolution 
 //@access   Private
 /*router.delete('/evolution/:id/:evolution_id', auth, async (req, res) => {
@@ -337,8 +337,8 @@ router.post(
 
 router.delete('/evolution/:id/:evolution_id', auth, async (req, res) => {
     try {
-        const foundPlan = await Plan.findById(req.params.id);
-        const evoIds = foundPlan.evolutions.map(evo => evo._id.toString());
+        const foundExercise = await Exercise.findById(req.params.id);
+        const evoIds = foundExercise.evolutions.map(evo => evo._id.toString());
 
         const removeIndex = evoIds.indexOf(req.params.evolution_id);
         if (removeIndex === -1) {
@@ -349,9 +349,9 @@ router.delete('/evolution/:id/:evolution_id', auth, async (req, res) => {
              console.log("typeof expIds", typeof expIds);
              console.log("req.params", req.params);
              console.log("removed", expIds.indexOf(req.params.state_id)); */
-            foundPlan.evolutions.splice(removeIndex, 1);
-            await foundPlan.save();
-            return res.status(200).json(foundPlan);
+            foundExercise.evolutions.splice(removeIndex, 1);
+            await foundExercise.save();
+            return res.status(200).json(foundExercise);
         }
     } catch (error) {
         console.error(error);
