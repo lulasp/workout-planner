@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const PlanSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     name: {
         name: String
@@ -32,7 +32,7 @@ const PlanSchema = new Schema({
         {
             user: {
                 type: Schema.Types.ObjectId,
-                ref: 'users'
+                ref: 'user'
             },
             initial_weight: {
                 type: String,
