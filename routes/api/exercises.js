@@ -100,9 +100,12 @@ router.get('/:id', auth, async (req, res) => {
 //@route    GET api/exercises/all/:plan_type 
 //@desc     Get exercise by plan type
 //@access   Private
-router.get('/all/:plan_type', auth, async (req, res) => {
+router.get('/all/:id', auth, async (req, res) => {
     try {
-        const plan = await Plan.findById(req.params.id);
+        const plan = await Exercise.find({ plan_type: req.params.id }).populate("plan_type", [
+            "plan_type"
+          ]);
+        console.log(req.params.id);
         console.log(plan);
         if (!plan) {
             return res.status(404).json({ msg: 'Exercises for plan not found' });
