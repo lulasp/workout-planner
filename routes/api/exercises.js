@@ -350,6 +350,11 @@ router.delete('/evolution/:id/:evolution_id', auth, async (req, res) => {
              console.log("req.params", req.params);
              console.log("removed", expIds.indexOf(req.params.state_id)); */
             foundExercise.evolutions.splice(removeIndex, 1);
+
+            //check user NEW
+            if (foundExercise.user.toString() !== req.user.id) {
+                return res.status(401).json({ msg: 'User not authorized' });
+            }
             await foundExercise.save();
             return res.status(200).json(foundExercise);
         }
