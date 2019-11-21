@@ -60,6 +60,13 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
   text-align: center;
 }
 
+/*LSP END LANGING PAGE? */
+/*LSP PROFIE_IMAGE*/
+
+#profile_image {
+  max-width: 150px;
+}
+
 .dark-overlay {
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
@@ -376,10 +383,10 @@ section {
 .page-container3 {
   background: #f7f7f7;
 }
-
+/*LSP - COMENTEI POR CAUSA DO SCROLL BAR E TROQUEI PADDING-TOP P/ 116 P/ 25*/
 .main-content {
-  padding-top: 116px;
-  min-height: 100vh;
+  padding-top: 25px;
+ /* min-height: 100vh;*/
 }
 
 @media (max-width: 991px) {
@@ -5180,6 +5187,15 @@ padding-bottom: 100px;
   border-bottom-right-radius: 3px;
   padding: 0;
   padding: 15px 30px;
+}
+
+
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: var(--light-color);
+  color: #333;
 }
 
 .au-alert.alert-dismissible .close {
