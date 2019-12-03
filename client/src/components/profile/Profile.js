@@ -1,16 +1,16 @@
 import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import DashboardActions from './DashboardActions';
-import Bodystate from './Bodystate';
+
+import ProfileActions from './ProfileActions'
+import ProfileBodystate from './ProfileBodystate';
+
 import { getCurrentProfile } from '../../actions/profile';
-
-
 import avatar from '../../images/icon/avatar-big-01.jpg';
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
+export const Profile = ({ getCurrentProfile, profile: { profile, loading }, auth: { user }, match }) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
@@ -66,22 +66,16 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                                                         </div>
                                                     </div>
                                                     <hr></hr>
-                                                    <div className="card-text text-sm-center">
-                                                        <DashboardActions />
-                                                        <hr></hr>
-                                                        <Bodystate bodystate={profile.body_state} />
-                                                        <Link to="/">
-                                                            <i className="fa fa-info"> </i>
-                                                        </Link>
-                                                        <Link to="/">
-                                                            <i className="fa fa-info"> </i>
-                                                        </Link>
-                                                        <Link to="/">
-                                                            <i className="fa fa-info"> </i>
-                                                        </Link>
-                                                        <Link to="/">
-                                                            <i className="fa fa-info"> </i>
-                                                        </Link>
+                                                </div>
+                                                <div className="card-text text-sm-center">
+                                                    <ProfileActions />
+                                                    <hr></hr>
+                                                </div>
+                                            </div>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="mx-auto d-block">
+                                                        <ProfileBodystate bodystate={profile.body_state} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,15 +114,16 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
         )
 }
 
-Dashboard.propTypes = {
+
+Profile.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
-};
+    profile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => ({
-    auth: state.auth,
-    profile: state.profile
-})
+    profile: state.profile,
+    auth: state.auth
+});
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile })(Profile);

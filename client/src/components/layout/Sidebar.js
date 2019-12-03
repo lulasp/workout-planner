@@ -37,7 +37,7 @@ const Sidebar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
                             <i className="fa fa-sitemap"></i>Exercises</Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/profile">
                             <i className="fa fa-user"></i>Profile</Link>
                     </li>
                 </ul>
