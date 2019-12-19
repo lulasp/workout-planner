@@ -16,11 +16,11 @@ export const Bodystate = ({ bodystate, deleteBodystate }) => {
             <td>{bs.heart_rate}</td>
             <td className="hide-sm">{bs.blood_pressure}</td>
             <td id="fromdate" className="">
-                <Moment format='YYYY/MM/DD'>{bs.from}</Moment> -{' '}
+                <Moment format='DD/MM/YYYY'>{bs.from}</Moment> -{' '}
                 {bs.current === true ? (
                     ' Now'
                 ) : (
-                        <Moment format='YYYY/MM/DD'>{bs.to}</Moment>
+                        <Moment format='DD/MM/YYYY'>{bs.to}</Moment>
                     )
                 }
             </td>

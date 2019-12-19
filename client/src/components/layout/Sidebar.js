@@ -28,12 +28,12 @@ const Sidebar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
                             <i className="fas fa-tachometer-alt"></i>Dashboard</Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/plans">
                             <i className="fa fa-calendar-o"></i>Plans</Link>
                         <span className="inbox-num">3</span>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/exercises">
                             <i className="fa fa-sitemap"></i>Exercises</Link>
                     </li>
                     <li>

@@ -16,12 +16,21 @@ import Sidebar from './components/layout/Sidebar';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+//DASHBOARD IMPORTS
 import Dashboard from './components/dashboard/Dashboard';
+//PROFILE IMPORTS
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import AddBodystate from './components/profile-forms/AddBodystate';
-import PrivateRoute from './components/routing/PrivateRoute';
 import Profile from './components/profile/Profile';
+import Bodystate from './components/profile/Bodystate';
+//PLANS IMPORTS
+import Plans from './components/plans/Plans';
+//EXERCISES IMPORTS
+import Exercises from './components/exercises/Exercises';
+
+import PrivateRoute from './components/routing/PrivateRoute';
+
 
 import Alert from './components/layout/Alert';
 
@@ -76,8 +85,11 @@ const App = () => {
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />
                 <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-                <PrivateRoute exact path="/body_state" component={AddBodystate} />
+                <PrivateRoute exact path="/add-bodystate" component={AddBodystate} />
+                <PrivateRoute exact path="/bodystate/:id" component={Bodystate} />
                 <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/plans" component={Plans} />
+                <PrivateRoute exact path="/exercises" component={Exercises} />
               </Switch>
 
             </div>

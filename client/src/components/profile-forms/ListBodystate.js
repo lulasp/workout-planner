@@ -2,42 +2,12 @@ import React, { Fragment, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfileBodystate } from '../../actions/profile';
+import { getProfileBodystateById } from '../../actions/profile';
 
-export const EditBodystate = ({ profile: { profile, loading }, auth: { user }, addBodystate, getCurrentProfileBodystate, history }) => {
-    const [formData, setFormData] = useState({
-        height: '',
-        weight: '',
-        age: '',
-        muscle_mass: '',
-        fat_mass: '',
-        heart_rate: '',
-        blood_pressure: '',
-        from: '',
-        to: '',
-        current: true,
-        description: ''
-    });
-
+export const ListBodystate = ({ getProfileBodystateById, history }) => {
     useEffect(() => {
-        getCurrentProfileBodystate();
-
-        setFormData({
-            height: loading || !profile.height ? '' : profile.height,
-            weight: loading || !profile.weight ? '' : profile.weight,
-            age: loading || !profile.age ? '' : profile.age,
-            muscle_mass: loading || !profile.muscle_mass ? '' : profile.muscle_mass,
-            fat_mass: loading || !profile.fat_mass ? '' : profile.fat_mass,
-            heart_rate: loading || !profile.heart_rate ? '' : profile.heart_rate,
-            blood_pressure: loading || !profile.blood_pressure ? '' : profile.blood_pressure,
-            from: loading || !profile.from ? '' : profile.from,
-            to: loading || !profile.to ? '' : profile.to,
-            current: loading || !profile.current ? '' : profile.current,
-            description: loading || !profile.description ? '' : profile.description,
-        });
-    }, [loading, getCurrentProfileBodystate]);
-
-    const [toDateDisabled, toggleDisabled] = useState(true);
+        getProfileBodystateById();
+    }, [getProfileBodystateById]);
 
     const { height, weight, age, muscle_mass, fat_mass, heart_rate, blood_pressure, from, to, current, description } = formData;
 
@@ -194,17 +164,8 @@ export const EditBodystate = ({ profile: { profile, loading }, auth: { user }, a
     )
 }
 
-EditBodystate.propTypes = {
-    addBodystate: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    getCurrentProfileBodystate: PropTypes.func.isRequired,
-    profile: PropTypes.object.isRequired
-};
+ListBodystate.propTypes = {
+    getProfileBodystateById: PropTypes.func.isRequired
+}
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    profile: state.profile
-});
-
-export default connect(mapStateToProps, { addBodystate, getCurrentProfileBodystate })(withRouter(EditBodystate));
-
+export default connect(null, { getProfileBodystateById })(withRouter(ListBodystate));

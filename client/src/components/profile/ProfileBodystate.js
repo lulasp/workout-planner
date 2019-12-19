@@ -3,9 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { deleteBodystate } from '../../actions/profile';
+import { deleteBodystate, getProfileBodystateById } from '../../actions/profile';
 
-const ProfileBodystate = ({ bodystate, deleteBodystate }) => {
+
+const ProfileBodystate = ({ bodystate, deleteBodystate, getProfileBodystateById }) => {
     const bodystates = bodystate.map(bs => (
         <tr key={bs._id}>
             <td>
@@ -31,11 +32,11 @@ const ProfileBodystate = ({ bodystate, deleteBodystate }) => {
             <td>{bs.muscle_mass}</td>
             <td>{bs.fat_mass}</td>
             <td id="fromdate" className="">
-                <Moment format='YYYY/MM/DD'>{bs.from}</Moment> -{' '}
+                <Moment format='DD/MM/YYYY'>{bs.from}</Moment> -{' '}
                 {bs.current === true ? (
                     ' Now'
                 ) : (
-                        <Moment format='YYYY/MM/DD'>{bs.to}</Moment>
+                        <Moment format='DD/MM/YYYY'>{bs.to}</Moment>
                     )
                 }
             </td>
@@ -48,8 +49,7 @@ const ProfileBodystate = ({ bodystate, deleteBodystate }) => {
                 <button onClick={() => deleteBodystate(bs._id)} className="item" data-toggle="tooltip"><i className="fa fa-trash-o"></i></button>
             </td>
             <td>
-                <Link to={`/profile/body_state/${bs._id}`} className="item" data-toggle="tooltip"><i className="fa fa-info"></i></Link>
-
+                <Link to={`/bodystate/${bs._id}`} className="item" data-toggle="tooltip"><i className="fa fa-info"></i></Link>
             </td>
         </tr>
     ));

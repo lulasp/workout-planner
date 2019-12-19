@@ -239,26 +239,6 @@ router.put(
 //@route    DELETE api/profile/body_state/:state_id
 //@desc     Delete body_state from profile
 //@access   Private
-/*router.delete('/body_state/:state_id', auth, async (req, res) => {
-    try {
-        const profile = await Profile.findOne({ user: req.user.id });
-
-        //get remove index
-        const removeIndex = profile.body_state
-            .map(item => item.id)
-            .indexOf(req.params.exp_id);
-
-        profile.body_state.splice(removeIndex, 1);
-
-        await profile.save();
-
-        res.json(profile);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});*/
-
 router.delete('/body_state/:state_id', auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
@@ -283,5 +263,22 @@ router.delete('/body_state/:state_id', auth, async (req, res) => {
     }
 });
 
+//@route    GET api/profile/me/bodystate/:bodystate_id
+//@desc     Get current users bodystate by id
+//@access   Private
+router.get('/me/bodystate/:bodystate_id', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name']);
+
+        if (!profile) {
+            return res.status(400).json({ msg: 'There is no profile for this user.' });
+        }
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router;

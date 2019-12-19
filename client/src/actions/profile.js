@@ -133,6 +133,40 @@ export const addBodystate = (formData, history) => async dispatch => {
     }
 };
 
+//GET PROFILE BY ID
+export const getProfileBodystateById = bodystateId => async dispatch => {
+    try {
+        const res = await axios.get(`/api/profile/bodystate/${bodystateId}`);
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+//GET CURRENT USER PROFILE AND BODY STATE
+/*export const getCurrentProfileBodystate = () => async dispatch => {
+    try {
+        const res = await axios.get(`/api/profile/me/bodystate/${bodystate_id}`);
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};*/
+
 
 
 //DELETE BODYSTATE
